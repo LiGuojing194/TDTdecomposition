@@ -1,0 +1,7 @@
+setup.py
+/root/autodl-tmp/TCRTruss32/src/demo_truss/myops/mysrc/segment_isinMM/segment_isinMM.cpp
+/root/autodl-tmp/TCRTruss32/src/demo_truss/myops/mysrc/segment_isinMM/segment_isinMM_kernel.cu
+isinmm_extension.egg-info/PKG-INFO
+isinmm_extension.egg-info/SOURCES.txt
+isinmm_extension.egg-info/dependency_links.txt
+isinmm_extension.egg-info/top_level.txt
