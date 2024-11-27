@@ -19,7 +19,7 @@ The datasets are sourced from well-known platforms such as
 ### Installation package of extended tensor operator library `trusstensor`
 
 ```
-python  install ./TDTDecomposition/demo_truss/hpu_extension/setup.py install
+python ./TDTDecomposition/demo_truss/hpu_extension/setup.py install
 ```
 
 ### Truss decomposition running
