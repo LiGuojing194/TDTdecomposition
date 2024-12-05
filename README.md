@@ -28,6 +28,7 @@ sys.path.append('/root/autodl-tmp/TDTdecomposition')
 ```
 
 - **Optimized tensor based directed truss decomposition**
+
     Modify the absolute path  and run the following command for optimized TDT decomposition.
     ```python
     python /root/autodl-tmp/TDTdecomposition/demo_truss/singlegpu_truss.py  --graph /root/autodl-tmp/TDTdecomposition/test_data/example_graph.txt  --output  /root/autodl-tmp/TDTdecomposition/test_data/output/test.pth  --cuda
@@ -35,7 +36,8 @@ sys.path.append('/root/autodl-tmp/TDTdecomposition')
     The `read_prepro_save(args)` function is run to preprocess the graph into a directed data structure for truss decomposition , which exists in the xxx.pth file. After that, the xxx.pth file is loaded directly to perform the computation.
 
 - **Fusion Experiment**
-    Run the fusionexperiental.py script by the following command.
+
+    Run the `fusionexperiental.py` script by the following command.
     
     ```python
     python /root/autodl-tmp/TDTdecomposition/demo_truss/fusionexperiental.py  --graph /root/autodl-tmp/TDTdecomposition/test_data/example_graph.txt  --output  /root/autodl-tmp/TDTdecomposition/test_data/output/test.pth  --cuda
