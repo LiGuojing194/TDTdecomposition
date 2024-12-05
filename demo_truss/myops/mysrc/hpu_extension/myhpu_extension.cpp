@@ -539,12 +539,37 @@ void peeling_direct_tile_oi(torch::Tensor e_curr,
     peeling_direct_tile_oi_cuda(e_curr, rows, columns, row_ptr, r_edges, re_ptr, support, e_mask, n_mark, in_curr, l+1, n_cut);
 }
 
+/*************segment_ismm********/
+
+// 声明 CUDA 函数
+void segment_isinmm_cuda(
+    const torch::Tensor u_clos,
+    const torch::Tensor v_clos,
+    const torch::Tensor uptr,
+    const torch::Tensor vptr,
+    torch::Tensor u_mask,
+    torch::Tensor v_mask
+);
+
+// 包装函数
+void segment_isinmm(
+    torch::Tensor u_clos,
+    torch::Tensor v_clos,
+    torch::Tensor uptr,
+    torch::Tensor vptr,
+    torch::Tensor u_mask,
+    torch::Tensor v_mask
+) {
+    // 调用 CUDA 函数
+    segment_isinmm_cuda(u_clos, v_clos, uptr, vptr, u_mask, v_mask);
+}
+
 
 
 
 
 //****************************python module generating*************************************************************//
-PYBIND11_MODULE(mytensorf, m) {
+PYBIND11_MODULE(trusstensor, m) {
     m.def("segment_add", &segment_add, "Segment add operation");
     m.def("segment_isin2", &segment_isin2, "Segment isin2 operation on CUDA");
     m.def("segment_isin2tile", &segment_isin2tile, "Segment_isin2tile operation on CUDA");
@@ -564,4 +589,5 @@ PYBIND11_MODULE(mytensorf, m) {
     m.def("peeling_direct_tile_ii", &peeling_direct_tile_ii, "peeling_direct_tile_ii operation on CUDA");
     m.def("peeling_direct_oi", &peeling_direct_oi, "peeling_direct_ii operation on CUDA");
     m.def("peeling_direct_tile_oi", &peeling_direct_tile_oi, "peeling_direct_tile_ii operation on CUDA");
+    m.def("segment_isinmm", &segment_isinmm, "Segment isin operation on CUDA");
 }

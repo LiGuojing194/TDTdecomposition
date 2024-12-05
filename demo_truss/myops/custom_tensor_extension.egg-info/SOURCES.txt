@@ -1,0 +1,7 @@
+/root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/myhpu_extension.cpp
+/root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/myhpu_extension_kernel.cu
+/root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/myhpu_extension_opmp.cpp
+custom_tensor_extension.egg-info/PKG-INFO
+custom_tensor_extension.egg-info/SOURCES.txt
+custom_tensor_extension.egg-info/dependency_links.txt
+custom_tensor_extension.egg-info/top_level.txt

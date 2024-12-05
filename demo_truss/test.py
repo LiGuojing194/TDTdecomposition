@@ -7,12 +7,12 @@ import sys
 import torch
 import argparse
 import time
-sys.path.append('/root/autodl-tmp/TCRTruss32')
+sys.path.append('/root/autodl-tmp/TDTdecomposition')
 from src.type.Graph import Graph
 from src.type.CSRCOO import CSRCOO
 from src.type.CSRGraph import CSRGraph
 from src.framework.helper import batched_csr_selection, batched_csr_selection_opt2
-from mytensorf import segment_add, segment_isin2, segment_isin2tile, sub_AllAffectedSupport, sub_AllAffectedSupport_tile, sub_AllAffectedSupport_not, sub_AllAffectedSupport_tilenot
+from trusstensor import segment_add, segment_isin2, segment_isin2tile, sub_AllAffectedSupport, sub_AllAffectedSupport_tile, sub_AllAffectedSupport_not, sub_AllAffectedSupport_tilenot
 import logging 
 logging.basicConfig(format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s',
                     level=logging.INFO)

@@ -7,8 +7,7 @@ We provide source codes of truss decomposition、k-truss search、and triangle c
 The code of tenser based algorithms are implemented by Python in the PyTorch framework. The extended tensor operator library `trusstensor` is implemented by C++ and CUDA at a lower lever.
 
 ## Experimental environments
-The operating system is Ubuntu 20.04, and development tools such as g++ 9.4.0, Python 3.8, PyTorch 2.0.0, torch-scatter 2.1.2, and CUDA 11.8 are installed to ensure that the test environment can fully utilize next-generation hardware acceleration technologies,
-supporting the efficient testing and development of truss
+The operating system is Ubuntu 20.04, and development tools such as g++ 9.4.0, Python 3.8, PyTorch 2.0.0, torch-scatter 2.1.2, and CUDA 11.8 are installed to ensure that the test environment can fully utilize next-generation hardware acceleration technologies, supporting the efficient testing and development of truss
 decomposition algorithms.
 
 ## Dataset
@@ -16,20 +15,29 @@ The datasets are sourced from well-known platforms such as
 [SNAP (Stanford Network Analysis Platform)](https://snap.stanford.edu/data/) and [the Network Repository](https://networkrepository.com/index.php).
 
 ## Algorithms running 
-### Installation package of extended tensor operator library `trusstensor`
-
+#### ***Installation package of extended tensor operator library `trusstensor`***
+Modify the absolute path of the sources parameter in `setup.py`, then modify the path in the following command line and run to install the `trusstensor` library.
 ```
-python ./TDTDecomposition/demo_truss/hpu_extension/setup.py install
+python  install /root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/setup.py install
 ```
 
-### Truss decomposition running
+####  ***Truss decomposition***
+Modify the project path in the header of all python files to be run.
+```
+sys.path.append('/root/autodl-tmp/TDTdecomposition')
+```
 
-- Optimized tensor based directed truss decomposition
+- **Optimized tensor based directed truss decomposition**
+    Modify the absolute path  and run the following command for optimized TDT decomposition.
+    ```python
+    python /root/autodl-tmp/TDTdecomposition/demo_truss/singlegpu_truss.py  --graph /root/autodl-tmp/TDTdecomposition/test_data/example_graph.txt  --output  /root/autodl-tmp/TDTdecomposition/test_data/output/test.pth  --cuda
     ```
-    python  /root/autodl-tmp/TDTDecomposition/demo_truss/paperexperiental.py --graph /root/autodl-tmp/data/clueweb.ungraph.mtx  --output /root/autodl-tmp/output/clueweb.pth --cuda
-  ```
+    The `read_prepro_save(args)` function is run to preprocess the graph into a directed data structure for truss decomposition , which exists in the xxx.pth file. After that, the xxx.pth file is loaded directly to perform the computation.
 
-- Fusion experiments
+- **Fusion Experiment**
+    Run the fusionexperiental.py script by the following command.
+    
+    ```python
+    python /root/autodl-tmp/TDTdecomposition/demo_truss/fusionexperiental.py  --graph /root/autodl-tmp/TDTdecomposition/test_data/example_graph.txt  --output  /root/autodl-tmp/TDTdecomposition/test_data/output/test.pth  --cuda
     ```
-    python  /root/autodl-tmp/TDTDecomposition/demo_truss/paperexperiental.py --graph /root/autodl-tmp/data/clueweb.ungraph.mtx  --output /root/autodl-tmp/output/clueweb.pth --cuda
-  ```
+    The support computation and update functions before optimization are support_computing_before() and all_affect_support_not_before(), respectively; the optimized ones are support_computing() and all_affect_support_not(), respectively.

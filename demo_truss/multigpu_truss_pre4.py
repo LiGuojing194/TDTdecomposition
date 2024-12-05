@@ -7,12 +7,12 @@ import sys
 import torch
 import argparse
 import time
-sys.path.append('/root/autodl-tmp/TCRTruss32')
+sys.path.append('/root/autodl-tmp/TDTdecomposition')
 from src.type.Graph import Graph
 from src.type.CSRCOO import CSRCOO
 from src.type.CSRGraph import CSRGraph
 from src.framework.helper import batched_csr_selection, batched_csr_selection_opt2
-from mytensorf import segment_add, segment_isin2, segment_isin2tile, sub_AllAffectedSupport, sub_AllAffectedSupport_tile, sub_AllAffectedSupport_not, sub_AllAffectedSupport_tilenot, sub_AllAffectedSupport_notwin, sub_AllAffectedSupport_tilenotwin
+from trusstensor import segment_add, segment_isin2, segment_isin2tile, sub_AllAffectedSupport, sub_AllAffectedSupport_tile, sub_AllAffectedSupport_not, sub_AllAffectedSupport_tilenot, sub_AllAffectedSupport_notwin, sub_AllAffectedSupport_tilenotwin
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 """
 #2.用inwindow标记在索引范围内的边

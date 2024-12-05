@@ -7,12 +7,12 @@ import sys
 import torch
 import argparse
 import time
-sys.path.append('/root/autodl-tmp/TCRTruss32')
+sys.path.append('/root/autodl-tmp/TDTdecomposition')
 from src.type.Graph import Graph
 from src.type.CSRCOO import CSRCOO
 from src.type.CSRGraph import CSRGraph
 from src.framework.helper import batched_csr_selection, batched_csr_selection_opt2
-from mytensorf import segment_add, segment_isin2, segment_isin2tile, sub_AllAffectedSupport, sub_AllAffectedSupport_tile
+from trusstensor import segment_add, segment_isin2, segment_isin2tile, sub_AllAffectedSupport, sub_AllAffectedSupport_tile
 
 """
 ktruss_cuda2->ktruss_cuda2_v2->truss_cudan_n10_atomic.py->1 加上图压缩判断->2受影响子图一定要提取出来嘛

@@ -5,11 +5,11 @@ setup(
     name='custom_tensor_extension',  # 可以修改为更通用的名称，因为现在包含多个扩展
     ext_modules=[
         CUDAExtension(
-            name='mytensorf',  # 保持原有扩展模块
+            name='trusstensor',  # 保持原有扩展模块
             sources=[
-            '/root/autodl-tmp/TCRTruss32/src/demo_truss/myops/mysrc/hpu_extension/myhpu_extension.cpp',
-            '/root/autodl-tmp/TCRTruss32/src/demo_truss/myops/mysrc/hpu_extension/myhpu_extension_opmp.cpp',
-            '/root/autodl-tmp/TCRTruss32/src/demo_truss/myops/mysrc/hpu_extension/myhpu_extension_kernel.cu'
+            '/root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/myhpu_extension.cpp',
+            '/root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/myhpu_extension_opmp.cpp',
+            '/root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/myhpu_extension_kernel.cu'
             ],
             extra_compile_args={
                 'cxx': ['-fopenmp', '-std=c++17', '-O3'],
