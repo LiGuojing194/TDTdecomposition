@@ -18,7 +18,7 @@ The datasets are sourced from well-known platforms such as
 #### ***Installation package of extended tensor operator library `trusstensor`***
 Modify the absolute path of the sources parameter in `setup.py`, then modify the path in the following command line and run to install the `trusstensor` library.
 ```
-python  install /root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/setup.py install
+python  /root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/setup.py install
 ```
 
 ####  ***Truss decomposition***
