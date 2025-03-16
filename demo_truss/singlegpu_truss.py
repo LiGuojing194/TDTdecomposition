@@ -117,7 +117,7 @@ def k_truss(graph: CSRCOO, n_cut, num_v):
         all_affect_support_not(e_affect, graph, n_cut, e_mask, l, n_mark, support)
         graph.columns[e_curr] = -1   #看看能不能把这行去掉
         e_peeling_count += e_curr.shape[0]
-        if e_peeling_count > 10000000:
+        if e_peeling_count > 1000000:
             # e_mask = ~e_mask
             ##############e_mask.logical_not_()
             support = support[e_mask]
@@ -196,7 +196,7 @@ def main_csrcgraph(args):
     print("graph.columns type:", graph.columns.dtype)
     print("graph.ptr type:", graph.row_ptr.dtype)
     graph.row_ptr = graph.row_ptr.to(torch.int32)
-    n_cut = 1
+    n_cut = 2
     num_v = graph.num_vertices
     new_csr_to_tilingcsr = torch.compile(csr_to_tilingcsr)
     if n_cut > 1:

@@ -7,7 +7,7 @@ import sys
 import torch
 import argparse
 import time
-sys.path.append('/home/zhangqi/workspace/TCRTruss32')
+sys.path.append('/root/autodl-tmp/TDTdecomposition')
 from src.type.Graph import Graph
 from src.type.CSRCOO import CSRCOO
 from src.type.CSRGraph import CSRGraph
@@ -396,15 +396,15 @@ def k_truss(graph: CSRCOO, l, n_cut, num_v):
     else:
         #计算边映射序号             
         # print("-------------------compression------------------")
-        for i in range(4):
-            support = support_computing_k(graph, n_cut, l)
-            mask = support >= l  
-            e_rest = torch.where(mask)[0] 
-            graph.columns = graph.columns[e_rest]
-            graph.rows = graph.rows[e_rest]
-            values = torch.zeros(graph.row_ptr.shape[0]-1, dtype=torch.int32, device=graph.device)
-            run_segment_add(mask.int().to(torch.int32), graph.row_ptr, values)
-            graph.row_ptr = torch.cat([torch.zeros(1, dtype=torch.int32, device=graph.device), values.cumsum(0).to(torch.int32)])  
+        # for i in range(4):
+        #     support = support_computing_k(graph, n_cut, l)
+        #     mask = support >= l  
+        #     e_rest = torch.where(mask)[0] 
+        #     graph.columns = graph.columns[e_rest]
+        #     graph.rows = graph.rows[e_rest]
+        #     values = torch.zeros(graph.row_ptr.shape[0]-1, dtype=torch.int32, device=graph.device)
+        #     run_segment_add(mask.int().to(torch.int32), graph.row_ptr, values)
+        #     graph.row_ptr = torch.cat([torch.zeros(1, dtype=torch.int32, device=graph.device), values.cumsum(0).to(torch.int32)])  
         support = support_computing(graph.rows, graph.columns, graph.row_ptr, n_cut) #因为后面只对有向图中受影响边进行减，所以这里要计算出全部的支持值，不能只筛选了  #压缩图后不要重新计算支持度
         mask = support < l 
         e_del = torch.nonzero(mask).squeeze(1)  #要删除的边，support中对应的序号 
@@ -439,19 +439,19 @@ def k_truss(graph: CSRCOO, l, n_cut, num_v):
             e_del = e_affect[s_mask & (~mark)]  #得剔除e_del吧  
             mask[e_del] = True #删除过的边不会再出现受影响子图中的，因为提取子图时已经过滤掉了
             ed_count += e_del.shape[0]
-            # if ed_count >= (support.shape[0]/8):  #mask标记了所有要删除的边
-            #     print("-------------------compression------------------")
-            #     f_mask = ~mask
-            #     e_rest = torch.where(f_mask)[0] 
-            #     graph.columns = graph.columns[e_rest]
-            #     graph.rows = graph.rows[e_rest]
-            #     values = torch.zeros(graph.row_ptr.shape[0]-1, dtype=torch.int32, device=graph.device)
-            #     run_segment_add(f_mask.int().to(torch.int32), graph.row_ptr, values)
-            #     graph.row_ptr = torch.cat([torch.zeros(1, dtype=torch.int32, device=graph.device), values.cumsum(0).to(torch.int32)])   #这里太混乱了，还是得修改读图函数，将graph.row和tiling_row_ptr合二为一
-            #     support = support_computing(graph.rows, graph.columns, graph.row_ptr, n_cut) #因为后面只对有向图中受影响边进行减，所以这里要计算出全部的支持值，不能只筛选了  #压缩图后不要重新计算支持度
-            #     mask = support < l 
-            #     e_del = torch.nonzero(mask).squeeze(1)  #要删除的边，support中对应的序号 
-            #     ed_count = e_del.shape[0]
+            if ed_count >= (support.shape[0]/8):  #mask标记了所有要删除的边
+                print("-------------------compression------------------")
+                f_mask = ~mask
+                e_rest = torch.where(f_mask)[0] 
+                graph.columns = graph.columns[e_rest]
+                graph.rows = graph.rows[e_rest]
+                values = torch.zeros(graph.row_ptr.shape[0]-1, dtype=torch.int32, device=graph.device)
+                run_segment_add(f_mask.int().to(torch.int32), graph.row_ptr, values)
+                graph.row_ptr = torch.cat([torch.zeros(1, dtype=torch.int32, device=graph.device), values.cumsum(0).to(torch.int32)])   #这里太混乱了，还是得修改读图函数，将graph.row和tiling_row_ptr合二为一
+                support = support_computing(graph.rows, graph.columns, graph.row_ptr, n_cut) #因为后面只对有向图中受影响边进行减，所以这里要计算出全部的支持值，不能只筛选了  #压缩图后不要重新计算支持度
+                mask = support < l 
+                e_del = torch.nonzero(mask).squeeze(1)  #要删除的边，support中对应的序号 
+                ed_count = e_del.shape[0]
         e_rest = torch.nonzero(~mask).squeeze(1)
     torch.cuda.synchronize()
     t22 = time.time()
