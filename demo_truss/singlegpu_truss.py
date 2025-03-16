@@ -128,7 +128,7 @@ def k_truss(graph: CSRCOO, n_cut, num_v):
             segment_add(e_mask.int(), graph.row_ptr, values)
             graph.row_ptr = torch.cat([torch.zeros(1, dtype=torch.int32, device=graph.device), values.cumsum(0, dtype=torch.int32)])
             e_peeling_count = 0  
-            e_curr = torch.where(support <= l)[0]  #####
+            e_curr = torch.where(support <= l)[0] 
             ###########################
             ################e_mask = torch.zeros(graph.columns.shape[0], dtype=torch.bool, device=graph.device)
             e_mask = torch.ones(graph.columns.shape[0], dtype=torch.bool, device=graph.device)
