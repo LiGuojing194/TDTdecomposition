@@ -18,7 +18,7 @@ The datasets are sourced from well-known platforms such as
 #### ***Installation package of extended tensor operator library `trusstensor`***
 Modify the absolute path of the sources parameter in `setup.py`, then modify the path in the following command line and run to install the `trusstensor` library. Note that the `extra_compile_args` parameter in `setup.py` should be configured according to your experimental environment. For instance, when using NVIDIA A100 GPUs, you need to specify the corresponding compute capability by modifying the gencode flag to `-gencode=arch=compute_80,code=sm_80`.
 ```
-python  install /root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/setup.py install
+python  /root/autodl-tmp/TDTdecomposition/demo_truss/myops/mysrc/hpu_extension/setup.py install
 ```
 
 ####  ***Truss decomposition***
